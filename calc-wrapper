@@ -1,0 +1,18 @@
+#!/bin/bash
+prog=speedcrunch
+
+pid=$(pidof $prog)
+
+if [ -z $pid ]; then
+    $prog &
+else
+
+foc=$(xdotool getactivewindow getwindowpid)
+
+    if [[ $pid == $foc ]]; then
+        xdotool getactivewindow windowminimize
+    else
+        wmctrl -x -R $prog
+    fi
+fi
+
